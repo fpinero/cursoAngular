@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CommonServicesModule } from '../common-services';
 import { NotificationComponent } from './notification/notification.component';
 import { HomeComponent } from './home/home.component';
 
@@ -8,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     NotificationComponent,
-    HomeComponent
+    HomeComponent,
   ],
-  exports: [NotificationComponent,
-  HomeComponent],
+  exports: [
+    NotificationComponent,
+    HomeComponent,
+  ],
   imports: [
-    CommonModule
+    CommonModule, CommonServicesModule,
   ]
 })
 export class MainModule {
@@ -25,4 +28,3 @@ export class MainModule {
     }
   }
 }
-
