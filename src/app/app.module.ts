@@ -16,13 +16,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonServicesModule } from './common-services';
 import { MainModule } from './main';
-import { SecurityModule } from './security';
+import { AuthInterceptor, SecurityModule } from './security';
 import { DemosComponent } from './demos/demos.component';
 import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AjaxWaitInterceptor } from './main/ajax-wait';
+import { ContactosModule } from './contactos';
+import { BlogModule } from './blog';
 
 @NgModule({
   declarations: [
@@ -35,12 +37,13 @@ import { AjaxWaitInterceptor } from './main/ajax-wait';
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
-    AppRoutingModule,
+    AppRoutingModule, ContactosModule, BlogModule,
   ],
   providers: [
     LoggerService,
     { provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL },
     { provide: LOCALE_ID, useValue: 'es-ES' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
     ],
   bootstrap: [AppComponent]
